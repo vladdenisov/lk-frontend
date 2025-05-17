@@ -3,9 +3,13 @@ import { LeaveType, VacationDaysResponse } from '@/types/leave';
 import { format } from 'date-fns';
 import { callProxy } from '@/lib/callProxy';
 
-export const useLeaveRequest = () => {
+interface UseLeaveRequestProps {
+  selectedLeaveType: string;
+}
+
+export const useLeaveRequest = (props: UseLeaveRequestProps) => {
   const [leaveTypes, setLeaveTypes] = useState<LeaveType[]>([]);
-  const [selectedLeaveType, setSelectedLeaveType] = useState<string>('');
+  const [selectedLeaveType, setSelectedLeaveType] = useState<string>(props.selectedLeaveType);
   const [vacationDaysInfo, setVacationDaysInfo] = useState<VacationDaysResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

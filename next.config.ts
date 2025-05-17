@@ -11,7 +11,8 @@ const nextConfig: NextConfig = {
     resolveAlias: {
       canvas: './empty-module.ts'
     }
-  }
+  },
+  devIndicators: false
 };
 
 export default nextConfig;

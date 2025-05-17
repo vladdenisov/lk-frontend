@@ -51,7 +51,7 @@ export function RegisterForm({
       if (response && response.user) {
         console.log("Registration successful! User:", response.user);
         // TODO: Store user context/state here if needed
-        router.push("/lk/users"); // Redirect to a protected page after registration
+        router.push("/lk"); // Redirect to a protected page after registration
       } else {
         console.error("Registration failed: Invalid response structure.");
         setError("Произошла ошибка при регистрации. Пожалуйста, попробуйте снова.");
@@ -67,13 +67,13 @@ export function RegisterForm({
   return (
     <div className={cn("flex flex-col gap-6 w-1/2 max-w-xl", className)} {...props}>
       <Card>
-        <CardHeader>
+        <CardHeader className="mt-6">
           <CardTitle className="text-2xl">Регистрация</CardTitle>
           <CardDescription>
             Введите ваши данные для создания аккаунта
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="mt-6">
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
               {error && (

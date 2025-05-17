@@ -2,4 +2,5 @@ ignoredBuiltDependencies:
   - sharp
 
 onlyBuiltDependencies:
+  - '@parcel/watcher'
   - canvas

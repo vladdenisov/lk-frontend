@@ -1,20 +1,21 @@
-import { UniqData } from "./common";
+import { Application, UniqData, Attachment, ApplicationStatus } from "./common";
 
 export interface VacationType extends UniqData {
   isPrimary: boolean;
   isPaid: boolean;
 }
 
-export interface VacationRequest extends UniqData {
-  Number: string;
+
+export interface VacationRequest extends Application {
   DateStart: string;
   DateEnd: string;
   DaysCount: number;
   VacationType: VacationType;
-  Comment: string;
-  Status: string;
-  Approver: UniqData;
-  Organization: UniqData;
-  Employee: UniqData;
 }
 
+export interface VacationRequestCreate extends Omit<VacationRequest, 'GUID' | 'Number' | 'Status' | 'Approver' | 'Organization' | 'name'> {
+  VacationType: string;
+  Employee: string;
+  Attachments?: Attachment[];
+  Status: ApplicationStatus;
+}

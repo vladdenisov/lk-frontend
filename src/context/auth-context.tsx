@@ -32,6 +32,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       // Fetch user without automatic redirect on error
       const currentUser = await getCurrentUser(false);
       setUser(currentUser);
+      setIsLoading(false);
+      setIsRefreshing(false);
     } catch (error) {
       console.error("AuthContext: Failed to fetch user on load", error);
       setUser(null);
@@ -42,6 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     } finally {
       setIsLoading(false);
+      setIsRefreshing(false);
     }
   }, [router, isRefreshing]);
 
@@ -70,8 +73,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsRefreshing(true);
       try {
         await fetchUser();
+        setIsRefreshing(false);
+        setIsLoading(false);
       } finally {
         setIsRefreshing(false);
+        setIsLoading(false);
       }
     }
   }, [fetchUser, isRefreshing]);

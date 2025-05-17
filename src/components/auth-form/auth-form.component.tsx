@@ -50,7 +50,7 @@ export function LoginForm({
 
       if (response && response.user) {
         console.log("Login successful! User:", response.user);
-        router.replace("/lk/users");
+        router.replace("/lk/personal-info");
       } else {
         console.error("Login failed: Invalid response structure.");
         setError("Произошла ошибка при входе. Пожалуйста, попробуйте снова.");
@@ -72,7 +72,7 @@ export function LoginForm({
             Введите ваш email и пароль для входа в систему
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="mt-6">
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
               {error && (

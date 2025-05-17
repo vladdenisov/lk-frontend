@@ -40,17 +40,21 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-
+import { useEffect } from "react";
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, refetchUser } = useAuth();
   const pathname = usePathname();
   const { isMobile } = useSidebar(); // Get mobile state
+
+  useEffect(() => {
+    refetchUser();
+  }, []);
 
   const navItems = [
     { title: "Главная", href: "/lk/dashboard", icon: LayoutDashboard },
     { title: "Личная информация", href: "/lk/personal-info", icon: User },
     { title: "Отсутствия", href: "/lk/time-off", icon: CalendarClock },
-    { title: "Заявки", href: "/lk/requests", icon: Send },
+    { title: "Заявки на отпуск", href: "/lk/requests/leave", icon: Send },
     { title: "Табели и графики", href: "/lk/timesheets", icon: Clock },
     { title: "Документы на подпись", href: "/lk/documents", icon: FileSignature },
     { title: "Архив документов", href: "/lk/archive", icon: Archive },
@@ -58,9 +62,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     { title: "Настройки", href: "/lk/settings", icon: Settings2 },
   ];
 
+  if (user?.roles.includes('manager')) {
+    navItems.push({ title: "Заявки Сотрудников", href: "/lk/manager/requests", icon: Send });
+  }
+
   const adminNavItems = [
-    { title: "Панель Администратора", href: "/lk/admin", icon: ShieldCheck },
+    { title: "Панель Администратора", href: "/lk/admin/users", icon: ShieldCheck },
   ];
+
 
   return (
     <Sidebar

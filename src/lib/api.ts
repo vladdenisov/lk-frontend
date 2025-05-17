@@ -57,8 +57,6 @@ export async function apiRequest<T>(
   // 2) handle 403 immediately
   if (res.status === 403) {
     console.log('403', res)
-    if (isServer && redirectMode === 'auto') redirect('/not-allowed')
-    else if (!isServer) window.location.href = '/not-allowed'
     throw new Error('Forbidden')
   }
 
@@ -105,13 +103,6 @@ export async function apiRequest<T>(
   // 4) if still not OK after potential retry, throw or handle as appropriate
   if (!res.ok) {
     if (res.status === 403) {
-      if (redirectMode === 'auto') {
-        if (isServer) {
-          redirect('/auth/forbidden');
-        } else {
-          window.location.href = '/auth/forbidden';
-        }
-      }
       throw new Error('Forbidden');
     }
 

@@ -1,0 +1,9 @@
+.pdf-viewer {
+  :global(.react-pdf__Page__textContent) {
+    display: none;
+  }
+  :global(.react-pdf__Page__annotations) {
+    display: none;
+  }
+}
+

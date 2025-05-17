@@ -28,6 +28,8 @@ const routeMap: Record<string, string> = {
   admin: "Администрирование",
   "leave": "Заявка на отпуск",
   "users": "Сотрудники",
+  'edit': 'Редактирование',
+  'view': 'Просмотр',
 };
 
 function Breadcrumbs() {
